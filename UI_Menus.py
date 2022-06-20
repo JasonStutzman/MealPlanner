@@ -18,13 +18,9 @@ class UI_Menu:
         "Prints the user menu"
         print("\n======= USER ========")
         print("'1' - View username")
-        print("'2' - Change target preferences")
-        print("'3' - About this program")
+        print("'2' - About this program")
         print("'?' - Print this menu again")
         print("'X' - Return to the main menu")
-
-    def print_targets_menu(self) -> None:
-        pass
 
     def print_ingredients_menu(self) -> None:
         """Prints the ingredients menu"""
@@ -53,20 +49,16 @@ class UI_Menu:
         print("'8'  - Print all meals in the database")
         print("'9'  - Print all ingredients in a meal")
         print("'10' - Print nutrition facts for a meal")
-        print("'11' - Change meal into a snack")
-        print("'12' - Print all snacks in the database")
-        print("'13' - Sync meals from Google Sheets")
-        print("'14' - Sync meals from CSV")
-        print("'15' - Sync meals to CSV")
+        print("'11' - Sync meals from Google Sheets")
+        print("'12' - Sync meals from CSV")
+        print("'13' - Sync meals to CSV")
         print("'?'  - Print this menu again")
         print("'X'  - Return to the main menu")
 
     def print_meal_planning_menu(self) -> None:
         """Prints the meal planning menu"""
         print("\n======== MEAL PLANNING ========")
-        print("'1' - Generate a meal plan at random")
-        print("'2' - Generate a meal plan around one meal")
-        print("'3' - Print all plans")
-        print("'4' - Select and export plan")
+        print("'1' - Generate meal plans")
+        print("'2' - Select and export plan")
         print("'?' - Print this menu again")
         print("'X' - Return to the main menu")

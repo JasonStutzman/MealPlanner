@@ -40,33 +40,3 @@ class Ingredient:
         print("\n///////////////////////////////////////")
 
 
-    def modify_vitamin_a(self) -> None:
-        print("\nVitamin A per " + self.measurement + " " + self.ingredient_name + " currently set to " +
-              str(self.vitamin_a) + "% daily value.")
-        while True:
-            user_input = (input("Input a new percentage of Vitamin A per " + self.measurement + " " +
-                                self.ingredient_name + " or press \'x\' to cancel:\n-> "))
-            try:
-                if user_input != "x":
-                    if int(user_input) < 0:
-                        print("INVALID INPUT - Input must be greater than or equal to 0.\n")
-                        pass
-                    else:
-                        self.vitamin_a = int(user_input)
-                        print("Vitamin A per " + self.measurement + " " + self.ingredient_name + " set to " +
-                              str(self.vitamin_a) + "% daily value.")
-                        break
-                else:
-                    break
-            except ValueError:
-                print("INVALID INPUT - Input must be a whole number.\n")
-
-
-
-    # Ability to modify any quantity above
-
-if __name__ == "__main__":
-    banana = Ingredient("banana", "one medium 7\"-8\"", 105, 1, 27, 3, 1, 3, 11, 0, 0, 12, 0, 0)
-    banana.print_ing_nutrition()
-    banana.modify_vitamin_a()
-    banana.print_ing_nutrition()

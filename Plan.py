@@ -10,6 +10,8 @@ class Plan:
         self.virtual_shopping_cart = {}
         self.quantities = {}
         self.ingredients_to_purchase = []
+        self.taste_preference = 0
+        self.taste_score = 0
         self.calories = 0
         self.fat = 0
         self.carbs = 0
@@ -62,9 +64,11 @@ class Plan:
                             protein_target: float, prep_time_target: float) -> float:
         fat_score_weight = 2.0
         general_nutrition_score_weight = 1.0
-        protein_score_weight = 1.5
-        prep_time_score_weight = 1.0
+        protein_score_weight = 2.5
+        prep_time_score_weight = 0.0
         vitamin_score_weight = 3.0
+        cholesterol_score_weight = 2.0
+        taste_score_weight = 0.75
         self.calories_score = (self.calories / (calorie_target * number_of_meals / 2)) * 100
         self.fat_score = (1 - abs((fat_target * number_of_meals / 2) - self.fat)/(fat_target * number_of_meals / 2)) * 100
         self.carbs_score = (1 - abs((carbs_target * number_of_meals / 2) - self.carbs)/(carbs_target * number_of_meals / 2)) * 100
@@ -92,10 +96,12 @@ class Plan:
         self.sodium_score = (1 - abs((100 * number_of_meals / 2) - self.potassium)/(100 * number_of_meals / 2)) * 100
         self.cholesterol_score = (1 - abs((100 * number_of_meals / 2) - self.potassium)/(100 * number_of_meals / 2)) * 100
         self.prep_time_score = (1 - (self.prep_time - prep_time_target) / prep_time_target) * 100
+        self.taste_score = self.taste_preference * 10
         return round(self.fat_score * fat_score_weight + self.carbs_score * general_nutrition_score_weight +
                      self.fiber_score * general_nutrition_score_weight + self.protein_score * protein_score_weight +
                      self.vitamin_score * vitamin_score_weight + self.potassium_score * general_nutrition_score_weight +
-                     self.cholesterol_score * general_nutrition_score_weight + self.prep_time_score * prep_time_score_weight, 2)
+                     self.cholesterol_score * cholesterol_score_weight + self.prep_time_score * prep_time_score_weight +
+                     self.taste_score * taste_score_weight, 2)
 
     def print_score(self) -> None:
         print("Overall score: " + str(round(self.overall_score, 2)))
@@ -110,24 +116,6 @@ class Plan:
         print("\tPotassium score \t\t" + str(round(self.potassium_score, 2)))
         print("\tSodium score \t\t\t" + str(round(self.sodium_score, 2)))
         print("\tCholesterol score \t\t" + str(round(self.cholesterol_score, 2)))
+        print("\tPrep time score \t\t" + str(round(self.prep_time_score, 2)))
+        print("\tTaste score \t\t\t" + str(round(self.taste_score, 2)))
 
-
-if __name__ == "__main__":
-    test_plan = Plan()
-    test_plan.cost = 54
-    test_plan.prep_time = 32
-    test_plan.calories = 15000
-    test_plan.fat = 98
-    test_plan.carbs = 263
-    test_plan.fiber = 35
-    test_plan.protein = 96
-    test_plan.vitamin_a = 750
-    test_plan.vitamin_b = 351
-    test_plan.vitamin_c = 600
-    test_plan.vitamin_d = 120
-    test_plan.vitamin_k = 65
-    test_plan.potassium = 120
-    test_plan.sodium = 2000
-    test_plan.cholesterol = 275
-    test_plan.overall_score = test_plan.single_metric_score(7, 2000, 87, 263, 38, 100, 120)
-    test_plan.print_score()

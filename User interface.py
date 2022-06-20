@@ -3,11 +3,10 @@ import jsonpickle
 import os
 from os import path
 from UI_Menus import UI_Menu
-from VirtualShoppingCart import VirtualShoppingCart
 
 
 def autosave(database, load_name) -> None:
-    output_file = jsonpickle.encode(db)
+    output_file = jsonpickle.encode(database)
     current_directory = os.getcwd()
     save_file = "{0}.txt".format(load_name)
     cat_path = os.path.join(current_directory, save_file)
@@ -26,6 +25,8 @@ def print_about_info() -> None:
 
 
 """Loads the database"""
+db = Database()
+load_name = ""
 print("This is a text-based meal planner.")
 loading = True
 while loading is True:
@@ -75,13 +76,12 @@ else:
 print("===========================")
 
 """Main functionality"""
-vs = VirtualShoppingCart()
 ui = UI_Menu()
 ui.print_main_menu()
 user_input = input("\nWhat would you like to do?\n-> ").upper()
 while user_input != "X":
     if user_input == "1":
-        # TODO Users Menu
+        """USER MENU"""
         ui.print_user_menu()
         user_user_input = input("\nWhat would you like to do?\n-> ").upper()
         while user_user_input != "X":
@@ -93,9 +93,6 @@ while user_input != "X":
                 else:
                     print("You've logged on 1 time.")
             elif user_user_input == "2":
-                """Change user target preferences"""
-                ui.print_targets_menu()
-            elif user_user_input == "3":
                 print_about_info()
             elif user_user_input == "?":
                 """Print the ingredients menu"""
@@ -106,7 +103,7 @@ while user_input != "X":
             ui.print_user_menu()
             user_user_input = input("\nWhat would you like to do?\n-> ").upper()
     elif user_input == "2":
-        # TODO Ingredients Menu
+        """INGREDIENTS MENU"""
         ui.print_ingredients_menu()
         user_ingredients_input = input("\nWhat would you like to do?\n-> ").upper()
         while user_ingredients_input != "X":
@@ -143,7 +140,7 @@ while user_input != "X":
             ui.print_ingredients_menu()
             user_ingredients_input = input("\nWhat would you like to do?\n-> ").upper()
     elif user_input == "3":
-        # TODO Meals Menu
+        """MEALS MENU"""
         ui.print_meals_menu()
         user_meals_input = input("\nWhat would you like to do?\n-> ").upper()
         while user_meals_input != "X":
@@ -182,18 +179,12 @@ while user_input != "X":
                 """Print nutrition facts for a meal"""
                 db.print_meal_nutrients()
             elif user_meals_input == "11":
-                """Mark meal as snack"""
-                db.change_meal_to_snack()
-            elif user_meals_input == "12":
-                """Print all snacks in the database"""
-                db.print_all_snacks_in_database()
-            elif user_meals_input == "13":
                 """Sync meals from Google Sheets"""
                 db.sync_meals_from_google_sheets()
-            elif user_meals_input == "14":
+            elif user_meals_input == "12":
                 """Sync meals from CSV"""
                 db.sync_meals_from_csv()
-            elif user_meals_input == "15":
+            elif user_meals_input == "13":
                 """Sync meals to CSV"""
                 db.sync_meals_to_csv()
             elif user_meals_input == "?":
@@ -205,7 +196,7 @@ while user_input != "X":
             ui.print_meals_menu()
             user_meals_input = input("\nWhat would you like to do?\n-> ").upper()
     elif user_input == "4":
-        # TODO Planning Menu
+        """MEAL PLANNING MENU"""
         ui.print_meal_planning_menu()
         user_plans_input = input("\nWhat would you like to do?\n-> ").upper()
         while user_plans_input != "X":
@@ -214,10 +205,7 @@ while user_input != "X":
                 db.generate_new_plans()
                 db.print_all_plans()
             elif user_plans_input == "2":
-                """Generate new plans around meal"""
-                pass
-            elif user_plans_input == "3":
-                """Select and export plan"""
+                """Export plan"""
                 db.select_and_export_plan()
             autosave(db, load_name)
             ui.print_meal_planning_menu()

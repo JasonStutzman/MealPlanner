@@ -1,13 +1,13 @@
 import os
 import inflection
-from Ingredient import Ingredient
-from os import path
+
 
 class Meal:
 
-    def __init__(self, meal_name: str, prep_time: int) -> None:
+    def __init__(self, meal_name: str, prep_time: int, taste_preference: float) -> None:
         self.meal_name = meal_name
         self.prep_time = prep_time
+        self.taste_preference = taste_preference
         self.is_snack = False
         self.ingredients = {}
         self.quantities = {}
@@ -25,6 +25,7 @@ class Meal:
         self.potassium = 0
         self.sodium = 0
         self.cholesterol = 0
+
 
     def write_meal_instructions(self):
         folder_directory = "C:/Users/18327/PycharmProjects/csci127-su22/Personal Projects/CSCI-127 Final/meal_instructions/"
@@ -80,11 +81,3 @@ class Meal:
         print("\tCholesterol " + "\t" + str(self.cholesterol) + "% daily value")
         print("\n///////////////////////////////////////")
 
-
-    # Ability to add ingredient and quantity to meal
-    # Ability to modify ingredient and quantity in meal
-    # Ability to modify cost of meal
-    # Ability to modify prep time
-    # Ability to add instructions
-    # Ability to print instructions
-    # Ability to print ingredients and quantity
